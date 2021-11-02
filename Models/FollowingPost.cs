@@ -12,8 +12,6 @@ namespace Models
 
         public int RootId { get; set; }
 
-        public int UserId { get; set; }
-
-        public User User { get; set; }
+      
     }
 }
