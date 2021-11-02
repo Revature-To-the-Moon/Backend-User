@@ -10,5 +10,7 @@ namespace Models
         public int Id { get; set; }
 
         public string Username { get; set; }
+
+        public List<FollowingPost> FollowingPosts {get; set;}
     }
 }
