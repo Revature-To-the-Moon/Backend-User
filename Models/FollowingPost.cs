@@ -8,10 +8,9 @@ namespace Models
     public class FollowingPost
     {
         public int Id {get; set;}
+        
         public string Postname {get; set;}
 
         public int RootId { get; set; }
-
-      
     }
 }
