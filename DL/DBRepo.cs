@@ -42,17 +42,50 @@ namespace DL
 
         public async Task<List<User>> GetAllUsersAsync()
         {
-            return await _context.User.Select(user => user).ToListAsync();
+            return await _context.User.Select(user => new User()
+            {
+                Id = user.Id,
+                Username = user.Username,
+                FollowingPosts = user.FollowingPosts.Select(p=>new FollowingPost()
+                {
+                    Id = p.Id,
+                    RootId  = p.RootId,
+                    Postname = p.Postname,
+                    UserId = p.UserId
+                }).ToList()
+            }).ToListAsync();
         }
 
         public async Task<User> GetUserByIdAsync(int userId)
         {
-            return await _context.User.AsNoTracking().FirstOrDefaultAsync(u => u.Id == userId);
+            return await _context.User.Include(user=>user.FollowingPosts).AsNoTracking().Select(user=>new User()
+            {
+                Id = user.Id,
+                Username = user.Username,
+                FollowingPosts = user.FollowingPosts.Select(p => new FollowingPost()
+                {
+                    Id = p.Id,
+                    RootId = p.RootId,
+                    Postname = p.Postname,
+                    UserId = p.UserId
+                }).ToList()
+            }).FirstOrDefaultAsync(u => u.Id == userId);
         }
 
         public async Task<User> GetUserByNameAsync(string username)
         {
-            return await _context.User.AsNoTracking().FirstOrDefaultAsync(u => u.Username == username);
+            return await _context.User.Include(user => user.FollowingPosts).AsNoTracking().Select(user => new User()
+            {
+                Id = user.Id,
+                Username = user.Username,
+                FollowingPosts = user.FollowingPosts.Select(p => new FollowingPost()
+                {
+                    Id = p.Id,
+                    RootId = p.RootId,
+                    Postname = p.Postname,
+                    UserId = p.UserId
+                }).ToList()
+            }).FirstOrDefaultAsync(u => u.Username == username);
         }
 
         public async Task<List<FollowingPost>> GetFollowingPostsAsync()
