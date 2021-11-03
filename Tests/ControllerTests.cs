@@ -236,8 +236,35 @@ namespace Tests
 
             var result = await service.GetByRootid(1) as ObjectResult;
             var actualResult = result.Value;
+            var noresult = await service.GetByRootid(-1) as ObjectResult;
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Null(noresult);
+        }
+
+        [Fact]
+        public async Task GetFollowingPostByuserIdShouldReturnFollowingPost()
+        {
+            FollowingPost mockFollowingPost =  new FollowingPost()
+            {
+                Id = 1,
+                Postname = "test1",
+                RootId = 1,
+                UserId = 4
+            };
+            List<FollowingPost> followingPosts = new List<FollowingPost>();
+            followingPosts.Add(mockFollowingPost);
+            var mockBL = new Mock<IBL>();
+
+            mockBL.Setup(x => x.GetFollowingPostByUserIdAsync(4)).ReturnsAsync(followingPosts);
+
+            FollowingPostController service = new FollowingPostController(mockBL.Object);
+
+            var result = await service.GetByUserid(4) as ObjectResult;
+            var actualResult = result.Value;
+            var noresult = await service.GetByUserid(-1) as ObjectResult;
 
             Assert.IsType<OkObjectResult>(result);
+            Assert.Null(noresult);
         }
 
         [Fact]
@@ -258,8 +285,10 @@ namespace Tests
 
             var result = await service.GetByPostname("Test1") as ObjectResult;
             var actualResult = result.Value;
+            var noresult = await service.GetByPostname("-Test") as ObjectResult;
 
             Assert.IsType<OkObjectResult>(result);
+            Assert.Null(noresult);
         }
 
         [Fact]
