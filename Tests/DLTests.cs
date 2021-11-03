@@ -47,7 +47,7 @@ namespace Tests
                     Username = "Test3"
                 };
 
-                repo.AddObjectAsync(userToAdd);
+                userToAdd = (User) await repo.AddObjectAsync(userToAdd);
 
             }
             using(var context = new UserDB(options))
@@ -71,7 +71,7 @@ namespace Tests
                     Username = "Test4"
                 };
 
-                repo.AddObjectAsync(userToAdd);
+                userToAdd = (User) await repo.AddObjectAsync(userToAdd);
 
                 User userToUpdate = new User()
                 {
@@ -79,7 +79,7 @@ namespace Tests
                     Username = "TestUpdate"
                 };
 
-                repo.UpdateObjectAsync(userToUpdate);
+                await repo.UpdateObjectAsync(userToUpdate);
 
             }
 
@@ -96,31 +96,86 @@ namespace Tests
         }
 
         [Fact]
-        public async void GetUserByIdShouldGetAUser()
+        public async void GetUserByIdShouldGetTheUser()
         {
+
             using (var context = new UserDB(options))
             {
                 IRepo repo = new DBRepo(context);
-
-                User userToGet = new User()
-                {
-                    Id = 1,
-                    Username = "Test"
-                };
-
-                repo.GetUserByIdAsync(1);
-            }
-
-            using (var context = new UserDB(options))
-            {
+                User userToGet = await repo.GetUserByIdAsync(1);
                 User user = await context.User.FirstOrDefaultAsync(u => u.Id == 1);
                 Assert.NotNull(user);
-                Assert.Equal("Test", user.Username);
+                Assert.Equal(user.Username, userToGet.Username);
             }
 
         }
 
-        public void Seed()
+        [Fact]
+        public async void GetUserByNameShouldGetTheUser()
+        {
+            using (var context = new UserDB(options))
+            {
+                IRepo repo = new DBRepo(context);
+                User userToGet = await repo.GetUserByNameAsync("Test");
+                User user = await context.User.FirstOrDefaultAsync(u => u.Username == "Test");
+                Assert.NotNull(user);
+                Assert.Equal(user.Username, userToGet.Username);
+            }
+        }
+
+        [Fact]
+        public async void GetFollowingPostAsyncShouldGetAllFollowingPosts()
+        {
+            using var context = new UserDB(options);
+
+            IRepo repo = new DBRepo(context);
+
+            List<FollowingPost> posts = await repo.GetFollowingPostsAsync();
+
+            Assert.NotNull(posts);
+            Assert.Equal(2, posts.Count);
+
+        }
+
+        [Fact]
+        public async void GetFollowingPostByRootIdAsyncShouldReturnThatPost()
+        {
+            using var context = new UserDB(options);
+            IRepo repo = new DBRepo(context);
+
+            FollowingPost post = await repo.GetFollowingPostByRootIdAsync(1);
+
+            Assert.NotNull(post);
+            Assert.Equal("First Post for Testing", post.Postname);
+            Assert.Equal(1, post.UserId);
+        }
+
+        [Fact]
+        public async void GetFollowingPostByPostnameAsyncShouldReturnThatPost()
+        {
+            using var context = new UserDB(options);
+            IRepo repo = new DBRepo(context);
+
+            FollowingPost post = await repo.GetFollowingPostByPostnameAsync("Second Post for Testing");
+
+
+            Assert.NotNull(post);
+            Assert.Equal("Second Post for Testing", post.Postname);
+        }
+
+        [Fact]
+        public async void GetFollowingPostByUserIdAsyncShouldReturnThatPost()
+        {
+            using var context = new UserDB(options);
+            IRepo repo = new DBRepo(context);
+
+            List<FollowingPost> posts = await repo.GetFollowingPostByUserIdAsync(2);
+
+            Assert.NotNull(posts);
+            Assert.True(1 == posts.Count);
+        }
+
+        private void Seed()
         {
             using (var context = new UserDB(options))
             {
@@ -139,6 +194,24 @@ namespace Tests
                     {
                         Id = 2,
                         Username = "Test2"
+                    });
+
+                context.FollowingPost.AddRange(
+
+                    new FollowingPost()
+                    {
+                        Id = 1,
+                        Postname = "First Post for Testing",
+                        RootId = 1,
+                        UserId = 1
+                    },
+                    
+                    new FollowingPost()
+                    {
+                        Id = 2,
+                        Postname = "Second Post for Testing",
+                        RootId =2,
+                        UserId = 2
                     });
                 context.SaveChanges();
                 context.ChangeTracker.Clear();
