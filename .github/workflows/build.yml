@@ -45,7 +45,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/composite@v1
         if: always()
         with:
-          files: TestResults/**/*.xml  
+          files: "**/TestResults/**/*.xml"
 
       - name: Build and analyze
         env:
