@@ -15,6 +15,7 @@ namespace Tests
 {
     public class ControllerTests
     {
+        //UserController
         [Fact]
         public async Task GetUserShouldReturnListofUserAsync()
         {
@@ -65,11 +66,11 @@ namespace Tests
             var actualResult = result.Value;
 
             Assert.IsType<OkObjectResult>(result);
-            }
+        }
 
         [Fact]
         public async Task GetUserByNameShouldReturnUser()
-            {
+        {
             User mockUser = new User()
             {
                 Id = 1,
@@ -87,8 +88,33 @@ namespace Tests
             var actualResult = result.Value;
 
             Assert.IsType<OkObjectResult>(result);
-            }
+        }
 
+        [Fact]
+        public async Task AddShouldAddUser()
+        {
+            User mockUser = new User()
+            {
+                Id = 1,
+
+                Username = "Test1"
+            };
+
+            var mockBL = new Mock<IBL>();
+
+            mockBL.Setup(x => x.AddObjectAsync(mockUser)).ReturnsAsync(mockUser);
+
+            UserController service = new UserController(mockBL.Object);
+
+            var result = await service.Post(mockUser) as ObjectResult;
+            var actualResult = result.Value;
+
+            Assert.IsType<CreatedResult>(result);
+            Assert.Equal(HttpStatusCode.Created, (HttpStatusCode)result.StatusCode);
+            Assert.Equal(mockUser, actualResult);
+        }
+
+        //FollowingPostController
         [Fact]
         public async Task GetFollowingPostShouldReturnListofFollowingPostAsync()
         {
@@ -134,17 +160,17 @@ namespace Tests
 
             mockBL.Setup(x => x.GetFollowingPostByRootIdAsync(1)).ReturnsAsync(mockFollowingPost);
 
-           FollowingPostController service = new FollowingPostController(mockBL.Object);
+            FollowingPostController service = new FollowingPostController(mockBL.Object);
 
             var result = await service.GetByRootid(1) as ObjectResult;
             var actualResult = result.Value;
 
             Assert.IsType<OkObjectResult>(result);
-            }
+        }
 
         [Fact]
         public async Task GetFollowingPostByNameShouldReturnFollowingPost()
-            {
+        {
             FollowingPost mockFollowingPost = new FollowingPost()
             {
                 Id = 1,
@@ -162,6 +188,30 @@ namespace Tests
             var actualResult = result.Value;
 
             Assert.IsType<OkObjectResult>(result);
-            }
+        }
+
+        [Fact]
+        public async Task AddShouldAddFollowingPost()
+        {
+            FollowingPost mockFollowingPost = new FollowingPost()
+            {
+                Id = 1,
+
+                Postname = "Test1"
+            };
+
+            var mockBL = new Mock<IBL>();
+
+            mockBL.Setup(x => x.AddObjectAsync(mockFollowingPost)).ReturnsAsync(mockFollowingPost);
+
+            FollowingPostController service = new FollowingPostController(mockBL.Object);
+
+            var result = await service.Post(mockFollowingPost) as ObjectResult;
+            var actualResult = result.Value;
+
+            Assert.IsType<CreatedResult>(result);
+            Assert.Equal(HttpStatusCode.Created, (HttpStatusCode)result.StatusCode);
+            Assert.Equal(mockFollowingPost, actualResult);
+        }
     }
 }
