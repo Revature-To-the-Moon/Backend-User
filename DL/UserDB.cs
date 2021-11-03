@@ -10,5 +10,9 @@ namespace DL
         public UserDB() : base() { }
 
         public UserDB(DbContextOptions options) : base(options) { }
+
+        public DbSet<User> User { get; set; }
+
+        public DbSet<FollowingPost> FollowingPost { get; set; }
     }
 }
