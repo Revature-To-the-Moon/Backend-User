@@ -81,17 +81,19 @@ namespace WebAPI.Controllers
 
  
         [HttpDelete("id/{Id}")]
-        public async Task Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             User deleteUser = (User)await _bl.GetUserByIdAsync(id);
             await _bl.DeleteObjectAsync(deleteUser);
+            return Ok(deleteUser);
         }
 
         [HttpDelete("username/{Username}")]
-        public async Task Delete(string username)
+        public async Task<IActionResult> Delete(string username)
         {
             User deleteUser = (User)await _bl.GetUserByNameAsync(username);
             await _bl.DeleteObjectAsync(deleteUser);
+            return Ok(deleteUser);
         }
     }
 }
