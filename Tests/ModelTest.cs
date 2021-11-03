@@ -19,12 +19,15 @@ namespace Tests
         [Fact]
         public void UserShouldSetValidData()
         {
-            User test = new User(){
+            List<FollowingPost> posts = new List<FollowingPost>();
+            User test = new User() {
                 Id = 1,
-                Username = "testing"
+                Username = "testing",
+                FollowingPosts = posts
             };
 
             Assert.Equal("testing", test.Username);
+           
         }
 
         [Fact]
@@ -47,6 +50,27 @@ namespace Tests
             Assert.Equal("testing", test.Postname);
             Assert.Equal(4, test.RootId);
         }
+        [Fact]
+        public void ToStringShouldReturnTheCorrectFormat()
+        {
+            List<FollowingPost> posts = new List<FollowingPost>();
+            FollowingPost post = new FollowingPost();
+            post.Postname = "testpost";
+            post.RootId = 1;
+            post.UserId = 1;
+            posts.Add(post);
+            User test = new User()
+            {
+                Id = 1,
+                Username = "testing",
+                FollowingPosts = posts
+            };
+
+            string result = test.ToString();
+
+            Assert.Equal("Username: testing Following 1 Posts", result);
+        }
+        
 
         
     }
