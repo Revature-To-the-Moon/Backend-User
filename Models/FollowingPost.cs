@@ -12,5 +12,7 @@ namespace Models
         public string Postname {get; set;}
 
         public int RootId { get; set; }
+
+        public int UserId { get; set; }
     }
 }
