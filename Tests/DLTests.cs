@@ -175,6 +175,75 @@ namespace Tests
             Assert.True(1 == posts.Count);
         }
 
+        [Fact]
+        public async void AddingFollowingPostShouldAddFollowingPost()
+        {
+            using (var context = new UserDB(options))
+            {
+                IRepo repo = new DBRepo(context);
+                FollowingPost postToAdd = new FollowingPost()
+                {
+                    Id = 3,
+                    Postname = "Third Post for Testing",
+                    RootId = 1,
+                    UserId = 1
+                };
+
+                postToAdd = (FollowingPost) await repo.AddObjectAsync(postToAdd);
+
+            }
+            using (var context = new UserDB(options))
+            {
+                FollowingPost post = await context.FollowingPost.FirstOrDefaultAsync(u => u.Id == 3);
+
+                Assert.NotNull(post);
+                Assert.Equal("Third Post for Testing", post.Postname);
+                Assert.Equal(1, post.RootId);
+                Assert.Equal(1, post.UserId);
+            }
+        }
+
+        [Fact]
+        public async void UpdatingFollowingPostsShouldUpdateTheFollowingPost()
+        {
+            using (var context = new UserDB(options))
+            {
+                IRepo repo = new DBRepo(context);
+                FollowingPost postToAdd = new FollowingPost()
+                {
+                    Id = 3,
+                    Postname = "Third Post for Testing",
+                    RootId = 3,
+                    UserId = 1
+                };
+
+                postToAdd = (FollowingPost) await repo.AddObjectAsync(postToAdd);
+
+                FollowingPost postToUpdate = new FollowingPost()
+                {
+                    Id = 3,
+                    Postname = "TestUpdatePost",
+                    RootId = 3,
+                    UserId = 1
+                };
+
+                await repo.UpdateObjectAsync(postToUpdate);
+
+            }
+
+            using (var context = new UserDB(options))
+            {
+                FollowingPost post = await context.FollowingPost.FirstOrDefaultAsync(u => u.Id == 3);
+
+                Assert.NotNull(post);
+                Assert.NotEqual("Test", post.Postname);
+                Assert.Equal("TestUpdatePost", post.Postname);
+
+                Assert.Equal(3, post.RootId);
+
+            }
+        }
+
         private void Seed()
         {
             using (var context = new UserDB(options))
