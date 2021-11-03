@@ -114,6 +114,78 @@ namespace Tests
             Assert.Equal(mockUser, actualResult);
         }
 
+        [Fact]
+        public async Task UpdateShouldUpdateUser()
+        {
+            User mockUser = new User()
+            {
+                Id = 1,
+
+                Username = "Test1"
+            };
+
+            var mockBL = new Mock<IBL>();
+
+            mockBL.Setup(x => x.UpdateObjectAsync(mockUser));
+
+            UserController service = new UserController(mockBL.Object);
+
+            var result = await service.Put(mockUser) as ObjectResult;
+            var actualResult = result.Value;
+
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)result.StatusCode);
+            Assert.Equal(mockUser, actualResult);
+        }
+
+        [Fact]
+        public async Task DeleteByIdShouldDeleteUser()
+        {
+            User mockUser = new User()
+            {
+                Id = 1,
+
+                Username = "Test1"
+            };
+
+            var mockBL = new Mock<IBL>();
+
+            mockBL.Setup(x => x.DeleteObjectAsync(mockUser));
+
+            UserController service = new UserController(mockBL.Object);
+
+            var result = await service.Delete(mockUser.Id) as ObjectResult;
+            var actualResult = result.Value;
+
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)result.StatusCode);
+            //Assert.Null(actualResult);
+        }
+
+        [Fact]
+        public async Task DeleteByNameShouldDeleteUser()
+        {
+            User mockUser = new User()
+            {
+                Id = 1,
+
+                Username = "Test1"
+            };
+
+            var mockBL = new Mock<IBL>();
+
+            mockBL.Setup(x => x.DeleteObjectAsync(mockUser));
+
+            UserController service = new UserController(mockBL.Object);
+
+            var result = await service.Delete(mockUser.Username) as ObjectResult;
+            var actualResult = result.Value;
+
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)result.StatusCode);
+            //Assert.Null(actualResult);
+        }
+
         //FollowingPostController
         [Fact]
         public async Task GetFollowingPostShouldReturnListofFollowingPostAsync()
@@ -213,5 +285,55 @@ namespace Tests
             Assert.Equal(HttpStatusCode.Created, (HttpStatusCode)result.StatusCode);
             Assert.Equal(mockFollowingPost, actualResult);
         }
+
+        [Fact]
+        public async Task UpdateShouldUpdateFollowingPost()
+        {
+            FollowingPost mockFollowingPost = new FollowingPost()
+            {
+                Id = 1,
+
+                Postname = "Test1"
+            };
+
+            var mockBL = new Mock<IBL>();
+
+            mockBL.Setup(x => x.UpdateObjectAsync(mockFollowingPost));
+
+            FollowingPostController service = new FollowingPostController(mockBL.Object);
+
+            var result = await service.Put(mockFollowingPost) as ObjectResult;
+            var actualResult = result.Value;
+
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)result.StatusCode);
+            Assert.Equal(mockFollowingPost, actualResult);
+        }
+
+        [Fact]
+        public async Task DeleteByIdShouldDeleteFollowingPost()
+        {
+            FollowingPost mockFollowingPost = new FollowingPost()
+            {
+                Id = 1,
+
+                Postname = "Test1",
+                RootId = 3
+            };
+
+            var mockBL = new Mock<IBL>();
+
+            mockBL.Setup(x => x.DeleteObjectAsync(mockFollowingPost));
+
+            FollowingPostController service = new FollowingPostController(mockBL.Object);
+
+            var result = await service.Delete(mockFollowingPost.RootId) as ObjectResult;
+            var actualResult = result.Value;
+
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)result.StatusCode);
+            Assert.NotNull(result);
+        }
+        
     }
 }
