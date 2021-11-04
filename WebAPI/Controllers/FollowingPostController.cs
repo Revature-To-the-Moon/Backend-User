@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class FollowingPostController : ControllerBase
     {
-        private IBL _bl;
+        private readonly IBL _bl;
         public FollowingPostController(IBL bl)
         {
             _bl = bl;
@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <param name="userid"></param>
         /// <returns></returns>
-        [HttpGet("{userid/{userid}")]
+        [HttpGet("userid/{userid}")]
         public async Task<IActionResult> GetByUserid(int userid)
         {
             List<FollowingPost> userFollowingPosts = await _bl.GetFollowingPostByUserIdAsync(userid);
@@ -55,7 +55,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("{postname/{postname}")]
+        [HttpGet("postname/{postname}")]
         public async Task<IActionResult> GetByPostname(string postname)
         {
             FollowingPost followingPost = await _bl.GetFollowingPostByPostnameAsync(postname);
@@ -69,7 +69,7 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("{rootid/{rootid}")]
+        [HttpGet("rootid/{rootid}")]
         public async Task<IActionResult> GetByRootid(int rootid)
         {
             FollowingPost followingPost = await _bl.GetFollowingPostByRootIdAsync(rootid);
@@ -102,7 +102,7 @@ namespace WebAPI.Controllers
         [HttpDelete("rootid/{rootid}")]
         public async Task<IActionResult> Delete(int rootid)
         {
-            FollowingPost deleteFollowingPost = (FollowingPost)await _bl.GetFollowingPostByRootIdAsync(rootid);
+            FollowingPost deleteFollowingPost = await _bl.GetFollowingPostByRootIdAsync(rootid);
             await _bl.DeleteObjectAsync(deleteFollowingPost);
             return Ok(deleteFollowingPost);
         }
