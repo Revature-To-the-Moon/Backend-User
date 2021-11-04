@@ -40,7 +40,7 @@ jobs:
       - name: Restore
         run: dotnet restore ${{ env.WORKING_DIRECTORY }}
       - name: Test
-        run: dotnet test ${{ env.WORKING_DIRECTORY }} --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+        run: dotnet test ${{ env.WORKING_DIRECTORY }} --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover 
 
       - name: Build and analyze
         env:
