@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class FollowingPostController : ControllerBase
     {
-        private IBL _bl;
+        private readonly IBL _bl;
         public FollowingPostController(IBL bl)
         {
             _bl = bl;
@@ -102,7 +102,7 @@ namespace WebAPI.Controllers
         [HttpDelete("rootid/{rootid}")]
         public async Task<IActionResult> Delete(int rootid)
         {
-            FollowingPost deleteFollowingPost = (FollowingPost)await _bl.GetFollowingPostByRootIdAsync(rootid);
+            FollowingPost deleteFollowingPost = await _bl.GetFollowingPostByRootIdAsync(rootid);
             await _bl.DeleteObjectAsync(deleteFollowingPost);
             return Ok(deleteFollowingPost);
         }

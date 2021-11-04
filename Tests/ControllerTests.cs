@@ -44,7 +44,7 @@ namespace Tests
 
             Assert.IsType<OkObjectResult>(result);
             Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)result.StatusCode);
-            Assert.Equal(2, mockUser.Count());
+            Assert.Equal(2, mockUser.Count);
         }
 
         [Fact]
@@ -215,7 +215,7 @@ namespace Tests
 
             Assert.IsType<OkObjectResult>(result);
             Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)result.StatusCode);
-            Assert.Equal(2, mockFollowingPost.Count());
+            Assert.Equal(2, mockFollowingPost.Count);
         }
 
         [Fact]
