@@ -9,7 +9,7 @@ namespace DL
 {
     public class DBRepo : IRepo
     {
-        private UserDB _context;
+        private readonly UserDB _context;
 
         public DBRepo(UserDB context)
         {

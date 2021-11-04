@@ -11,7 +11,7 @@ namespace BL
 {
     public class UserBL : IBL
     {
-        private IRepo _repo;
+        private readonly IRepo _repo;
 
         public UserBL(IRepo repo)
         {
