@@ -59,6 +59,27 @@ namespace Tests
             }
         }
 
+        // [Fact]
+        // public async void DeletingUserShoulddeleteUser()
+        // {
+        //     using(var context = new UserDB(options))
+        //     {
+        //         IRepo repo = new DBRepo(context);
+        //         User userToDelete = await repo.GetUserByIdAsync(1);
+              
+
+        //         userToDelete = (User) await repo.AddObjectAsync(userToDelete);
+
+        //     }
+        //     using(var context = new UserDB(options))
+        //     {
+        //         User user = await context.User.FirstOrDefaultAsync(u => u.Id == 1);
+        //         List<User> users = 
+        //         Assert.Null(user);
+        //         Assert.Equal("Test3", user.Username);
+        //     }
+        // }
+
         [Fact]
         public async void UpdateUserShouldUpdateUser()
         {
