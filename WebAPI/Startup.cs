@@ -36,7 +36,7 @@ namespace WebAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
             });
             services.AddDbContext<UserDB>(options =>
-            options.UseNpgsql(Configuration.GetConnectionString("UserDB")));
+            options.UseSqlServer(Configuration.GetConnectionString("UserDB")));
             services.AddScoped<IRepo, DBRepo>();
             services.AddScoped<IBL, UserBL>();
         }

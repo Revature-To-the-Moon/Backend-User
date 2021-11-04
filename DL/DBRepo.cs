@@ -42,7 +42,7 @@ namespace DL
 
         public async Task<List<User>> GetAllUsersAsync()
         {
-            return await _context.User.Select(user => new User()
+            return await _context.Users.Select(user => new User()
             {
                 Id = user.Id,
                 Username = user.Username,
@@ -58,7 +58,7 @@ namespace DL
 
         public async Task<User> GetUserByIdAsync(int userId)
         {
-            return await _context.User.Include(user => user.FollowingPosts).AsNoTracking().Select(user => new User()
+            return await _context.Users.Include(user => user.FollowingPosts).AsNoTracking().Select(user => new User()
             {
                 Id = user.Id,
                 Username = user.Username,
@@ -74,7 +74,7 @@ namespace DL
 
         public async Task<User> GetUserByNameAsync(string username)
         {
-            return await _context.User.Include(user => user.FollowingPosts).AsNoTracking().Select(user => new User()
+            return await _context.Users.Include(user => user.FollowingPosts).AsNoTracking().Select(user => new User()
             {
                 Id = user.Id,
                 Username = user.Username,
@@ -90,21 +90,21 @@ namespace DL
 
         public async Task<List<FollowingPost>> GetFollowingPostsAsync()
         {
-            return await _context.FollowingPost.Select(post => post).ToListAsync();
+            return await _context.FollowingPosts.Select(post => post).ToListAsync();
         }
 
         public async Task<FollowingPost> GetFollowingPostByRootIdAsync(int rootId)
         {
-            return await _context.FollowingPost.AsNoTracking().FirstOrDefaultAsync(u => u.RootId == rootId);
+            return await _context.FollowingPosts.AsNoTracking().FirstOrDefaultAsync(u => u.RootId == rootId);
         }
 
         public async Task<FollowingPost> GetFollowingPostByPostnameAsync(string postname)
         {
-            return await _context.FollowingPost.AsNoTracking().FirstOrDefaultAsync(u => u.Postname == postname);
+            return await _context.FollowingPosts.AsNoTracking().FirstOrDefaultAsync(u => u.Postname == postname);
         }
         public async Task<List<FollowingPost>> GetFollowingPostByUserIdAsync(int userId)
         {
-            return await _context.FollowingPost.AsNoTracking().Where(u => u.UserId == userId).ToListAsync();
+            return await _context.FollowingPosts.AsNoTracking().Where(u => u.UserId == userId).ToListAsync();
         }
 
     }
