@@ -52,33 +52,47 @@ namespace Tests
             }
             using(var context = new UserDB(options))
             {
-                User user = await context.User.FirstOrDefaultAsync(u => u.Id == 3);
+                User user = await context.Users.FirstOrDefaultAsync(u => u.Id == 3);
 
                 Assert.NotNull(user);
                 Assert.Equal("Test3", user.Username);
             }
         }
 
-        // [Fact]
-        // public async void DeletingUserShoulddeleteUser()
-        // {
-        //     using(var context = new UserDB(options))
-        //     {
-        //         IRepo repo = new DBRepo(context);
-        //         User userToDelete = await repo.GetUserByIdAsync(1);
-              
+        [Fact]
+        public async void DeletingUserShoulddeleteUser()
+        {
+            using (var context = new UserDB(options))
+            {
+                IRepo repo = new DBRepo(context);
+                User userToAdd = new User()
+                {
+                    Id = 4,
+                    Username = "Test4"
+                };
 
-        //         userToDelete = (User) await repo.AddObjectAsync(userToDelete);
+                userToAdd = (User)await repo.AddObjectAsync(userToAdd);
 
-        //     }
-        //     using(var context = new UserDB(options))
-        //     {
-        //         User user = await context.User.FirstOrDefaultAsync(u => u.Id == 1);
-        //         List<User> users = 
-        //         Assert.Null(user);
-        //         Assert.Equal("Test3", user.Username);
-        //     }
-        // }
+                User userToDelete = new User()
+                {
+                    Id = 4,
+                    Username = "Test4"
+                };
+
+                await repo.DeleteObjectAsync(userToDelete);
+
+            }
+            using (var context = new UserDB(options))
+            {
+                User user = await context.Users.FirstOrDefaultAsync(u => u.Id == 4);
+                IRepo repo = new DBRepo(context);
+                List<User> users = await repo.GetAllUsersAsync();
+            
+                Assert.Null(user);
+                Assert.Equal(2, users.Count);
+                
+            }
+        }
 
         [Fact]
         public async void UpdateUserShouldUpdateUser()
@@ -106,7 +120,7 @@ namespace Tests
 
             using (var context = new UserDB(options))
             {
-                User user = await context.User.FirstOrDefaultAsync(u => u.Id == 4);
+                User user = await context.Users.FirstOrDefaultAsync(u => u.Id == 4);
 
                 Assert.NotNull(user);
                 Assert.NotEqual("Test4", user.Username);
@@ -124,7 +138,7 @@ namespace Tests
             {
                 IRepo repo = new DBRepo(context);
                 User userToGet = await repo.GetUserByIdAsync(1);
-                User user = await context.User.FirstOrDefaultAsync(u => u.Id == 1);
+                User user = await context.Users.FirstOrDefaultAsync(u => u.Id == 1);
                 Assert.NotNull(user);
                 Assert.Equal(user.Username, userToGet.Username);
             }
@@ -138,7 +152,7 @@ namespace Tests
             {
                 IRepo repo = new DBRepo(context);
                 User userToGet = await repo.GetUserByNameAsync("Test");
-                User user = await context.User.FirstOrDefaultAsync(u => u.Username == "Test");
+                User user = await context.Users.FirstOrDefaultAsync(u => u.Username == "Test");
                 Assert.NotNull(user);
                 Assert.Equal(user.Username, userToGet.Username);
             }
@@ -215,7 +229,7 @@ namespace Tests
             }
             using (var context = new UserDB(options))
             {
-                FollowingPost post = await context.FollowingPost.FirstOrDefaultAsync(u => u.Id == 3);
+                FollowingPost post = await context.FollowingPosts.FirstOrDefaultAsync(u => u.Id == 3);
 
                 Assert.NotNull(post);
                 Assert.Equal("Third Post for Testing", post.Postname);
@@ -254,7 +268,7 @@ namespace Tests
 
             using (var context = new UserDB(options))
             {
-                FollowingPost post = await context.FollowingPost.FirstOrDefaultAsync(u => u.Id == 3);
+                FollowingPost post = await context.FollowingPosts.FirstOrDefaultAsync(u => u.Id == 3);
 
                 Assert.NotNull(post);
                 Assert.NotEqual("Test", post.Postname);
@@ -274,7 +288,7 @@ namespace Tests
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
 
-                context.User.AddRange(
+                context.Users.AddRange(
                     new User()
                     {
                         Id = 1,
@@ -286,7 +300,7 @@ namespace Tests
                         Username = "Test2"
                     });
 
-                context.FollowingPost.AddRange(
+                context.FollowingPosts.AddRange(
 
                     new FollowingPost()
                     {
