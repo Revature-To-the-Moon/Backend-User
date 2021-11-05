@@ -104,7 +104,7 @@ namespace DL
         }
         public async Task<List<FollowingPost>> GetFollowingPostByUserIdAsync(int userId)
         {
-            return await _context.FollowingPosts.AsNoTracking().Where(u => u.UserId == userId).ToListAsync();
+            return await _context.FollowingPosts.AsNoTracking().Where(u => u.UserId == userId).Select(post=>post).ToListAsync();
         }
 
     }
