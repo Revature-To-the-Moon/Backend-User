@@ -74,6 +74,13 @@ jobs:
         with:
           push: true
           tags: siavashnezhad/tothemoon-user:${{github.run_number}}
+      - 
+        name: Log into container registry
+        uses: Azure/docker-login@v1
+        with:
+          login-server: index.docker.io
+          username: ${{ secrets.AZ_USERNAME }}
+          password: ${{ secrets.AZ_PASSWORD }}
       -
         name: Set target AKS cluster
         uses: Azure/aks-set-context@v1
@@ -85,7 +92,7 @@ jobs:
         name: Create k8s secret
         uses: Azure/k8s-create-secret@v1
         with:
-          container-registry-url: docker.io
+          container-registry-url: index.docker.io
           container-registry-username: ${{ secrets.DOCKERHUB_USERNAME }}
           container-registry-password: ${{ secrets.DOCKERHUB_TOKEN }}
           secret-name: demo-k8s-secret
