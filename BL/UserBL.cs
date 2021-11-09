@@ -78,7 +78,7 @@ namespace BL
             return await _repo.GetFollowingByIdAsync(followingId);
         }
         
-        public async Task<List<Following>> GetFollowingByFollowerUserIdAnync(int userId)
+        public async Task<List<Following>> GetFollowingByFollowerUserIdAsync(int userId)
         {
             return await _repo.GetFollowingByFollowerUserIdAnync(userId);
         }
