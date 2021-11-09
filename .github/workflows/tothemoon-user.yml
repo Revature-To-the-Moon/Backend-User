@@ -15,7 +15,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: tothemoon-user
-        image: siavashnezhad/tothemoon-user
+        image: siavashnezhad/tothemoon-user:${{github.run_number}}
         imagePullPolicy: "Always"
         ports:
         - containerPort: 80
