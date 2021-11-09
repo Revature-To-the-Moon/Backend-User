@@ -21,7 +21,7 @@ namespace DL
         public Task<FollowingPost> GetFollowingPostByPostnameAsync(string postname);
         public Task<List<FollowingPost>> GetFollowingPostByUserIdAsync(int userId);
         public Task<List<Following>> GetAllFollowingAsync();
-        public Task<Following> GetFollowingByIdAsync();
+        public Task<Following> GetFollowingByIdAsync(int followingId);
         public Task<List<Following>> GetFollowingByFollowerUserIdAnync(int userId);
 
     }
