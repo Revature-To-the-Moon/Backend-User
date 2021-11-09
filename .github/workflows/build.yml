@@ -73,4 +73,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: siavashnezhad/tothemoon-user:${{.DATE}}
+          tags: siavashnezhad/tothemoon-user:${{github.run_number}}
