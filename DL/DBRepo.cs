@@ -107,5 +107,19 @@ namespace DL
             return await _context.FollowingPosts.AsNoTracking().Where(u => u.UserId == userId).Select(post=>post).ToListAsync();
         }
 
+        public Task<List<Following>> GetAllFollowingAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Following> GetFollowingByIdAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Following>> GetFollowingByFollowerUserIdAnync(int userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

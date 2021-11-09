@@ -21,5 +21,7 @@ namespace Models
         {
             return $"Username: {this.Username} Following {FollowingPosts.Count} Posts";
         }
+
+        public List<Following> Followings { get; set; }
     }
 }
