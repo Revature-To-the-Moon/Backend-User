@@ -82,7 +82,7 @@ namespace BL
 
         public Task<Following> GetFollowingByIdAsync(int followingId);
 
-        public Task<List<Following>> GetFollowingByFollowerUserIdAnync(int userId);
+        public Task<List<Following>> GetFollowingByFollowerUserIdAsync(int userId);
     }
 
 }
