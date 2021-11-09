@@ -59,5 +59,12 @@ namespace WebAPI
                 return NoContent();
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] Following newFollowing)
+        {
+            Following addedFollowing = (Following)await _bl.AddObjectAsync(newFollowing);
+            return Created("api/[controller]", addedFollowing);
+        }
     }
 }

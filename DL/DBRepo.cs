@@ -52,6 +52,13 @@ namespace DL
                     RootId = p.RootId,
                     Postname = p.Postname,
                     UserId = p.UserId
+                }).ToList(),
+                Followings = _context.Following.Where(f => f.FollowerUserId == user.Id).Select(p => new Following()
+                {
+                    Id = p.Id,
+                    FollowerUserId = p.FollowerUserId,
+                    FollowingUserId = p.FollowingUserId,
+                    FollowingUserName = p.FollowingUserName
                 }).ToList()
             }).ToListAsync();
         }
@@ -109,17 +116,17 @@ namespace DL
 
         public async Task<List<Following>> GetAllFollowingAsync()
         {
-            return await _context.Followings.Select(f => f).ToListAsync();
+            return await _context.Following.Select(f => f).ToListAsync();
         }
 
         public async Task<Following> GetFollowingByIdAsync(int followingId)
         {
-            return await _context.Followings.AsNoTracking().FirstOrDefaultAsync(f => f.Id == followingId);
+            return await _context.Following.AsNoTracking().FirstOrDefaultAsync(f => f.Id == followingId);
         }
 
         public async Task<List<Following>> GetFollowingByFollowerUserIdAsync(int userId)
         {
-            return await _context.Followings.Where(f => f.FollowerUserId == userId).ToListAsync();
+            return await _context.Following.Where(f => f.FollowerUserId == userId).ToListAsync();
         }
     }
 }

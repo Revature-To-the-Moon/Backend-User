@@ -35,12 +35,13 @@ namespace DL.Migrations
                     b.Property<string>("FollowingUserName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                    // b.Property<int?>("UserId")
+                    //     .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                   // b.HasIndex("UserId");
+                    b.HasIndex("FollowerUserId");
 
                     b.ToTable("Following");
                 });
@@ -88,7 +89,7 @@ namespace DL.Migrations
                 {
                     b.HasOne("Models.User", null)
                         .WithMany("Followings")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("FollowerUserId");
                 });
 
             modelBuilder.Entity("Models.FollowingPost", b =>
