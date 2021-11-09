@@ -85,6 +85,7 @@ jobs:
         name: Logging into Azure
         run: |
           az login --service-principal -u 3aefbcee-0107-4546-8c8b-72ae66f17070 -p 2U87Q~Zu44L4p6-bIKIlk52usbaUgmLjKuJbX --tenant 6b63e28a-a8f9-47b5-aa40-97e231215164
+          kubectl config set-cluster demo-cluster --server=https://52.141.211.229:80
       - 
         name: Create deployment
         uses: okteto/apply@v4.2
