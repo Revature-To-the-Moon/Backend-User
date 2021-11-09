@@ -71,7 +71,26 @@ namespace Tests
             Assert.Equal("Username: testing Following 1 Posts", result);
         }
         
+        [Fact]
+        public void FollowingShouldCreate()
+        {
+            Following test = new Following();
+            Assert.NotNull(test);
+        }
 
+        [Fact]
+        public void FollowingShouldSetValidData()
+        {
+            
+            Following test = new Following() {
+                Id = 1,
+                FollowingUserName = "testing",
+                FollowingUserId = 2
+            };
+
+            Assert.Equal("testing", test.FollowingUserName);
+           
+        }
         
     }
 }

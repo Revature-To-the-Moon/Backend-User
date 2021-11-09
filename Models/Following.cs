@@ -13,6 +13,6 @@ namespace Models
 
         public int FollowingUserId { get; set; }
 
-        public int FollowingUserName{ get; set;}
+        public string FollowingUserName{ get; set;}
     }
 }
