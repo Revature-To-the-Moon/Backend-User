@@ -14,8 +14,5 @@ namespace DL
         public DbSet<User> Users { get; set; }
 
         public DbSet<FollowingPost> FollowingPosts { get; set; }
-
-        public DbSet<Following> Followings { get; set; }
-
     }
 }

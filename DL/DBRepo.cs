@@ -107,19 +107,19 @@ namespace DL
             return await _context.FollowingPosts.AsNoTracking().Where(u => u.UserId == userId).Select(post=>post).ToListAsync();
         }
 
-        public async Task<List<Following>> GetAllFollowingAsync()
+        public Task<List<Following>> GetAllFollowingAsync()
         {
-            return await _context.Followings.Select(f => f).ToListAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task<Following> GetFollowingByIdAsync(int followingId)
+        public Task<Following> GetFollowingByIdAsync()
         {
-            return await _context.Followings.AsNoTracking().FirstOrDefaultAsync(f => f.Id == followingId);
+            throw new NotImplementedException();
         }
 
-        public async Task<List<Following>> GetFollowingByFollowerUserIdAnync(int userId)
+        public Task<List<Following>> GetFollowingByFollowerUserIdAnync(int userId)
         {
-            return await _context.Followings.Where(f => f.FollowerUserId == userId).ToListAsync();
+            throw new NotImplementedException();
         }
     }
 }
