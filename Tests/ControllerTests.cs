@@ -457,6 +457,30 @@ namespace Tests
             Assert.Equal(3, actualResult.Count);
             Assert.Equal(2, actualResult[0].Id);
         }
+
+        [Fact]
+        public async Task AddShouldAddFollowing()
+        {
+            Following mockFollowing = new Following()
+            {
+                Id = 1,
+
+                FollowingUserName = "Test1"
+            };
+
+            var mockBL = new Mock<IBL>();
+
+            mockBL.Setup(x => x.AddObjectAsync(mockFollowing)).ReturnsAsync(mockFollowing);
+
+            WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
+
+            var result = await service.Post(mockFollowing) as ObjectResult;
+            var actualResult = (Following)result.Value;
+
+            Assert.IsType<CreatedResult>(result);
+            Assert.Equal(HttpStatusCode.Created, (HttpStatusCode)result.StatusCode);
+            Assert.Equal(mockFollowing, actualResult);
+        }
         
     }
 }
