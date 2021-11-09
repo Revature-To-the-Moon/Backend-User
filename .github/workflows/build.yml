@@ -82,10 +82,12 @@ jobs:
           username: ${{ secrets.AZ_USERNAME }}
           password: ${{ secrets.AZ_PASSWORD }}
       -
+        run: |
+          az login --service-principal -u 3aefbcee-0107-4546-8c8b-72ae66f17070 -p 2U87Q~Zu44L4p6-bIKIlk52usbaUgmLjKuJbX --tenant 6b63e28a-a8f9-47b5-aa40-97e231215164
+      -
         name: Set target AKS cluster
         uses: Azure/aks-set-context@v1
         with:
-          creds: '${{ secrets.AZURE_CREDENTIALS }}'
           cluster-name: 'tothemoon'
           resource-group: '210913-ToTheMoon'
       - 
