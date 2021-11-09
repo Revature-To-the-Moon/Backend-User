@@ -117,7 +117,7 @@ namespace DL
             return await _context.Followings.AsNoTracking().FirstOrDefaultAsync(f => f.Id == followingId);
         }
 
-        public async Task<List<Following>> GetFollowingByFollowerUserIdAnync(int userId)
+        public async Task<List<Following>> GetFollowingByFollowerUserIdAsync(int userId)
         {
             return await _context.Followings.Where(f => f.FollowerUserId == userId).ToListAsync();
         }
