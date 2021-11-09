@@ -22,10 +22,12 @@ namespace BL
         {
             return await _repo.AddObjectAsync(objectToAdd);
         }
+
         public async Task UpdateObjectAsync(Object objectToUpdate)
         {
             await _repo.UpdateObjectAsync(objectToUpdate);
         }
+
         public async Task DeleteObjectAsync(Object objectToDelete)
         {
             await _repo.DeleteObjectAsync(objectToDelete);
@@ -55,15 +57,30 @@ namespace BL
         {
             return await _repo.GetFollowingPostByRootIdAsync(rootId);
         }
-
+        
         public async Task<FollowingPost> GetFollowingPostByPostnameAsync(string postname)
         {
             return await _repo.GetFollowingPostByPostnameAsync(postname);
         }
-
+        
         public async Task<List<FollowingPost>> GetFollowingPostByUserIdAsync(int userId)
         {
             return await _repo.GetFollowingPostByUserIdAsync(userId);
+        }
+        
+        public Task<List<Following>> GetAllFollowingAsync()
+        {
+            throw new NotImplementedException();
+        }
+        
+        public Task<Following> GetFollowingByIdAsync()
+        {
+            throw new NotImplementedException();
+        }
+        
+        public Task<List<Following>> GetFollowingByFollowerUserIdAnync(int userId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
