@@ -46,7 +46,7 @@ namespace WebAPI
             }
         }
 
-         [HttpGet("id/{id}")]
+        [HttpGet("id/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             Following following= await _bl.GetFollowingByIdAsync(id);
