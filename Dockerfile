@@ -39,4 +39,8 @@ WORKDIR /app
 COPY --from=build /app .
 ENTRYPOINT ["dotnet", "WebAPI.dll"]
 
+<<<<<<< HEAD
 EXPOSE 80
+=======
+EXPOSE 5001
+>>>>>>> b81a22d395b318a7084d23f4ecf12213a0db6f2b
