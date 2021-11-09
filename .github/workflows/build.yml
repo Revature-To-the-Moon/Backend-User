@@ -74,3 +74,18 @@ jobs:
         with:
           push: true
           tags: siavashnezhad/tothemoon-user:${{github.run_number}}
+      -
+        name: Set target AKS cluster
+        uses: Azure/aks-set-context@v1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          cluster-name: tothemoon
+          resource-group: 210913-ToTheMoon
+      - 
+        name: Create k8s secret
+        uses: Azure/k8s-create-secret@v1
+        with:
+          container-registry-url: docker.io
+          container-registry-username: ${{ secrets.DOCKERHUB_USERNAME }}
+          container-registry-password: ${{ secrets.DOCKERHUB_TOKEN }}
+          secret-name: demo-k8s-secret
