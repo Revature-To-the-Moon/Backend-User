@@ -82,19 +82,7 @@ jobs:
           username: ${{ secrets.AZ_USERNAME }}
           password: ${{ secrets.AZ_PASSWORD }}
       -
+        name: Logging into Azure
         run: |
           az login --service-principal -u 3aefbcee-0107-4546-8c8b-72ae66f17070 -p 2U87Q~Zu44L4p6-bIKIlk52usbaUgmLjKuJbX --tenant 6b63e28a-a8f9-47b5-aa40-97e231215164
-      -
-        name: Set target AKS cluster
-        uses: Azure/aks-set-context@v1
-        with:
-          cluster-name: 'tothemoon'
-          resource-group: '210913-ToTheMoon'
-      - 
-        name: Create k8s secret
-        uses: Azure/k8s-create-secret@v1
-        with:
-          container-registry-url: index.docker.io
-          container-registry-username: ${{ secrets.DOCKERHUB_USERNAME }}
-          container-registry-password: ${{ secrets.DOCKERHUB_TOKEN }}
-          secret-name: demo-k8s-secret
+          kubectl apply -f tothemoon-user.yml
