@@ -68,19 +68,19 @@ namespace BL
             return await _repo.GetFollowingPostByUserIdAsync(userId);
         }
         
-        public async Task<List<Following>> GetAllFollowingAsync()
+        public Task<List<Following>> GetAllFollowingAsync()
         {
-            return await _repo.GetAllFollowingAsync();
+            throw new NotImplementedException();
         }
         
-        public async Task<Following> GetFollowingByIdAsync(int followingId)
+        public Task<Following> GetFollowingByIdAsync()
         {
-            return await _repo.GetFollowingByIdAsync(followingId);
+            throw new NotImplementedException();
         }
         
-        public async Task<List<Following>> GetFollowingByFollowerUserIdAnync(int userId)
+        public Task<List<Following>> GetFollowingByFollowerUserIdAnync(int userId)
         {
-            return await _repo.GetFollowingByFollowerUserIdAnync(userId);
+            throw new NotImplementedException();
         }
     }
 }

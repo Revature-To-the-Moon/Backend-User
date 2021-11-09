@@ -80,7 +80,7 @@ namespace BL
         /// <returns></returns>
         public Task<List<Following>> GetAllFollowingAsync();
 
-        public Task<Following> GetFollowingByIdAsync(int followingId);
+        public Task<Following> GetFollowingByIdAsync();
 
         public Task<List<Following>> GetFollowingByFollowerUserIdAsync(int userId);
     }
