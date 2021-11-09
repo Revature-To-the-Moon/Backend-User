@@ -79,8 +79,8 @@ jobs:
         uses: Azure/aks-set-context@v1
         with:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
-          cluster-name: tothemoon
-          resource-group: 210913-ToTheMoon
+          cluster-name: 'tothemoon'
+          resource-group: '210913-ToTheMoon'
       - 
         name: Create k8s secret
         uses: Azure/k8s-create-secret@v1
