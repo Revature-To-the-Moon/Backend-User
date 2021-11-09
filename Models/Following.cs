@@ -12,5 +12,7 @@ namespace Models
         public int FollowerUserId { get; set; }
 
         public int FollowingUserId { get; set; }
+
+        public int FollowingUserName{ get; set;}
     }
 }
