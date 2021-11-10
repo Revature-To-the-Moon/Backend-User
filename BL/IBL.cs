@@ -73,7 +73,7 @@ namespace BL
         /// <param name="userId"></param>
         /// <returns>List of following posts.</returns>
         public Task<List<FollowingPost>> GetFollowingPostByUserIdAsync(int userId);
-        
+
         /// <summary>
         /// Gets all following from the database
         /// </summary>

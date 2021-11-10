@@ -65,7 +65,7 @@ namespace DL
 
         public async Task<User> GetUserByIdAsync(int userId)
         {
-            return await _context.Users.Include(user => user.FollowingPosts).Include(user=>user.Followings).AsNoTracking().Select(user => new User()
+            return await _context.Users.Include(user => user.FollowingPosts).Include(user => user.Followings).AsNoTracking().Select(user => new User()
             {
                 Id = user.Id,
                 Username = user.Username,
@@ -125,7 +125,7 @@ namespace DL
         }
         public async Task<List<FollowingPost>> GetFollowingPostByUserIdAsync(int userId)
         {
-            return await _context.FollowingPosts.AsNoTracking().Where(u => u.UserId == userId).Select(post=>post).ToListAsync();
+            return await _context.FollowingPosts.AsNoTracking().Where(u => u.UserId == userId).Select(post => post).ToListAsync();
         }
 
         public async Task<List<Following>> GetAllFollowingAsync()
