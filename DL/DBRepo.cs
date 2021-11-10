@@ -112,6 +112,7 @@ namespace DL
         }
 
         // ---------- Methods for FollowingPost functionality ----------
+
         public async Task<List<FollowingPost>> GetFollowingPostsAsync()
         {
             return await _context.FollowingPosts.Select(post => post).ToListAsync();

@@ -12,7 +12,7 @@ namespace Models
         public int Id { get; set; }
 
         [Required]
-        [RegularExpression("^[a-zA-Z0-9 !?']+$")]
+       // [RegularExpression("^[a-zA-Z0-9 !?']+$")]
         public string Username { get; set; }
 
         public List<FollowingPost> FollowingPosts {get; set;}

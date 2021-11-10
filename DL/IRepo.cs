@@ -17,6 +17,7 @@ namespace DL
         public Task DeleteObjectAsync(Object objectToDelete);
 
         // ---------- Methods for User functionality ----------
+
         public Task<List<User>> GetAllUsersAsync();
         
         public Task<User> GetUserByIdAsync(int userId);
@@ -24,6 +25,7 @@ namespace DL
         public Task<User> GetUserByNameAsync(string username);
 
         // ---------- Methods for FollowingPost functionality ----------
+
         public Task<List<FollowingPost>> GetFollowingPostsAsync();
         
         public Task<FollowingPost> GetFollowingPostByRootIdAsync(int rootId);
