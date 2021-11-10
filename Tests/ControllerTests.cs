@@ -459,6 +459,48 @@ namespace Tests
         }
 
         [Fact]
+        public async Task GetFollowingByUserIdShouldReturnListofFollowingAsync()
+        {
+            List<Following> mockFollowing = new List<Following>()
+            {
+                new Following()
+                {
+                    Id = 2,
+                    FollowingUserName = "test2",
+                    FollowerUserId = 2,
+                    FollowingUserId = 7
+                },
+                new Following()
+                {
+                    Id = 3,
+                    FollowingUserName = "test3",
+                    FollowerUserId = 2,
+                    FollowingUserId = 7
+                },
+                new Following()
+                {
+                    Id = 4,
+                    FollowingUserName = "test4",
+                    FollowerUserId = 2,
+                    FollowingUserId = 7
+                }
+            };
+            var mockBL = new Mock<IBL>();
+
+            mockBL.Setup(x => x.GetFollowingByFollowerUserIdAsync(7)).ReturnsAsync(mockFollowing);
+                
+            WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
+
+            var result = await service.GetFollowingByUserId(7) as ObjectResult;
+            List<Following> actualResult = (List<Following>)result.Value;
+            
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)result.StatusCode);
+            Assert.Equal(3, actualResult.Count);
+            Assert.Equal(2, actualResult[0].Id);
+        }
+
+        [Fact]
         public async Task AddShouldAddFollowing()
         {
             Following mockFollowing = new Following()

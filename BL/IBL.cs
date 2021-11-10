@@ -27,11 +27,13 @@ namespace BL
         /// <param name="objectToDelete"></param>
         /// <returns></returns>
         public Task DeleteObjectAsync(Object objectToDelete);
+        
+        // ---------- Methods for User functionality ----------
+
         /// <summary>
         /// Gets all the users from the database 
         /// </summary>
         /// <returns>List of all users.</returns>
-
         public Task<List<User>> GetAllUsersAsync();
 
         /// <summary>
@@ -47,6 +49,8 @@ namespace BL
         /// <param name="username"></param>
         /// <returns>A User</returns>
         public Task<User> GetUserByNameAsync(string username);
+
+        // ---------- Methods for FollowingPost functionality --------
 
         /// <summary>
         /// Gets all the followingposts from the database
@@ -74,15 +78,33 @@ namespace BL
         /// <returns>List of following posts.</returns>
         public Task<List<FollowingPost>> GetFollowingPostByUserIdAsync(int userId);
 
+        // ---------- Methods for Following functionality --------
+        
         /// <summary>
         /// Gets all following from the database
         /// </summary>
         /// <returns></returns>
         public Task<List<Following>> GetAllFollowingAsync();
 
+        /// <summary>
+        /// Gets a following by it's Id
+        /// </summary>
+        /// <param name="followingId"></param>
+        /// <returns>Following</returns>
         public Task<Following> GetFollowingByIdAsync(int followingId);
 
+        /// <summary>
+        /// Gets a list of following by user id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns> List of following</returns>
         public Task<List<Following>> GetFollowingByFollowerUserIdAsync(int userId);
+
+        /// <summary>
+        /// Gets a list of follower by user id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns>List of following</returns>
         public Task<List<Following>> GetFollowerByUserIdAsync(int userId);
     }
 

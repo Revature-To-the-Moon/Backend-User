@@ -325,7 +325,7 @@ namespace Tests
             using var context = new UserDB(options);
             IRepo repo = new DBRepo(context);
 
-            List<Following> followers = await repo.GetFollowingByFollowerUserIdAsync(1);
+            List<Following> followers = await repo.GetFollowerByUserIdAsync(1);
 
             Assert.NotNull(followers);
             Assert.True(1 == followers.Count);
