@@ -17,7 +17,8 @@ jobs:
         with:
           java-version: 1.11
       - 
-        uses: actions/checkout@v2
+        name: Checks out repository
+        uses: actions/checkout@v2.4.0
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - 
@@ -95,12 +96,15 @@ jobs:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
         id: setcontext
+      - 
+        name: Checks out repository
+        uses: actions/checkout@v2.4.0
       -
         name: Deplying image to K8s
         uses: Azure/k8s-deploy@v1.4
         with:
           manifests: |
-            P3-Backend-User/tothemoon-user.yml
+            tothemoon-user.yml
           images: |
             siavashnezhad/tothemoon-user:${{github.run_number}}
         
