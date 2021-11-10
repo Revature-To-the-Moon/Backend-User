@@ -33,6 +33,7 @@ namespace BL
             await _repo.DeleteObjectAsync(objectToDelete);
         }
 
+        // ---------- Methods for User functionality ----------
         public async Task<List<User>> GetAllUsersAsync()
         {
             return await _repo.GetAllUsersAsync();
@@ -48,6 +49,7 @@ namespace BL
             return await _repo.GetUserByNameAsync(username);
         }
 
+        // ---------- Methods for FollowingPost functionality ----------
         public async Task<List<FollowingPost>> GetFollowingPostsAsync()
         {
             return await _repo.GetFollowingPostsAsync();
@@ -68,6 +70,7 @@ namespace BL
             return await _repo.GetFollowingPostByUserIdAsync(userId);
         }
 
+        // ---------- Methods for Following functionality ----------
         public async Task<List<Following>> GetAllFollowingAsync()
         {
             return await _repo.GetAllFollowingAsync();
