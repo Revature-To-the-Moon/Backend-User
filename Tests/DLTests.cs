@@ -279,6 +279,58 @@ namespace Tests
             }
         }
 
+
+        [Fact]
+        public async void GetAllFollowingAsyncShouldGetAllFollowings()
+        {
+
+            using var context = new UserDB(options);
+            IRepo repo = new DBRepo(context);
+            List<Following> followings = await repo.GetAllFollowingAsync();
+
+            Assert.NotNull(followings);
+            Assert.Equal(2, followings.Count);
+
+        }
+
+        [Fact]
+        public async void GetFollowingByIdShouldReturnFollowing()
+        {
+            using(var context = new UserDB(options))
+            {
+                IRepo repo = new DBRepo(context);
+                Following followingToGet = await repo.GetFollowingByIdAsync(1);
+                Following following = await context.Following.FirstOrDefaultAsync(f => f.Id == 1);
+
+                Assert.NotNull(following);
+                Assert.Equal(following.FollowingUserName, followingToGet.FollowingUserName);
+            }
+        }
+
+        [Fact]
+        public async void GetFollowingByFollowingByFollowerUserIdAsyncShouldReturnFollowing()
+        {
+            using var context = new UserDB(options);
+            IRepo repo = new DBRepo(context);
+
+            List<Following> followings = await repo.GetFollowingByFollowerUserIdAsync(1);
+
+            Assert.NotNull(followings);
+            Assert.True(1 == followings.Count);
+        }
+
+        [Fact]
+        public async void GetFollowerByUserIdAsyncShouldReturnAllFollowers()
+        {
+            using var context = new UserDB(options);
+            IRepo repo = new DBRepo(context);
+
+            List<Following> followers = await repo.GetFollowingByFollowerUserIdAsync(1);
+
+            Assert.NotNull(followers);
+            Assert.True(1 == followers.Count);
+        }
+
         private void Seed()
         {
             using (var context = new UserDB(options))
@@ -316,6 +368,23 @@ namespace Tests
                         Postname = "Second Post for Testing",
                         RootId =2,
                         UserId = 2
+                    });
+
+                context.Following.AddRange(
+                    new Following()
+                    {
+                        Id  =1,
+                        FollowerUserId = 1,
+                        FollowingUserId = 2,
+                        FollowingUserName = "Test"
+                    },
+
+                    new Following()
+                    {
+                        Id = 2,
+                        FollowerUserId = 2,
+                        FollowingUserId = 1,
+                        FollowingUserName = "Test1"
                     });
                 context.SaveChanges();
                 context.ChangeTracker.Clear();
