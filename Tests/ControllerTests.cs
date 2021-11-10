@@ -386,7 +386,7 @@ namespace Tests
 
             mockBL.Setup(x => x.GetAllFollowingAsync()).ReturnsAsync(mockFollowing);
                 
-            WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
+            WebAPI.FollowingControllerHiSia service = new WebAPI.FollowingControllerHiSia(mockBL.Object);
 
             var result = await service.Get() as ObjectResult;
             var actualResult = (List<Following>)result.Value;
@@ -410,7 +410,7 @@ namespace Tests
 
             mockBL.Setup(x => x.GetFollowingByIdAsync(1)).ReturnsAsync(mockFollowing);
 
-            WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
+            WebAPI.FollowingControllerHiSia service = new WebAPI.FollowingControllerHiSia(mockBL.Object);
 
             var result = await service.GetById(1) as ObjectResult;
             var actualResult = result.Value;
@@ -447,7 +447,7 @@ namespace Tests
 
             mockBL.Setup(x => x.GetFollowingByFollowerUserIdAsync(2)).ReturnsAsync(mockFollowing);
                 
-            WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
+            WebAPI.FollowingControllerHiSia service = new WebAPI.FollowingControllerHiSia(mockBL.Object);
 
             var result = await service.GetByFollowerId(2) as ObjectResult;
             List<Following> actualResult = (List<Following>)result.Value;
@@ -472,7 +472,7 @@ namespace Tests
 
             mockBL.Setup(x => x.AddObjectAsync(mockFollowing)).ReturnsAsync(mockFollowing);
 
-            WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
+            WebAPI.FollowingControllerHiSia service = new WebAPI.FollowingControllerHiSia(mockBL.Object);
 
             var result = await service.Post(mockFollowing) as ObjectResult;
             var actualResult = (Following)result.Value;
