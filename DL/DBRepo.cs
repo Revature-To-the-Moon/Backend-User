@@ -40,8 +40,8 @@ namespace DL
             _context.ChangeTracker.Clear();
         }
 
+        // ---------- Methods for User functionality ----------
 
-        //---------------------------------------------methods for getting user ---------------------------------------------------------------
         public async Task<List<User>> GetAllUsersAsync()
         {
             return await _context.Users.Select(user => new User()
@@ -111,8 +111,8 @@ namespace DL
             }).FirstOrDefaultAsync(u => u.Username == username);
         }
 
+        // ---------- Methods for FollowingPost functionality ----------
 
-        //------------------------------------------------methods for get followingposts----------------------------------------------------------
         public async Task<List<FollowingPost>> GetFollowingPostsAsync()
         {
             return await _context.FollowingPosts.Select(post => post).ToListAsync();
@@ -132,7 +132,7 @@ namespace DL
             return await _context.FollowingPosts.AsNoTracking().Where(u => u.UserId == userId).Select(post => post).ToListAsync();
         }
 
-        //-------------------------------methods for get following --------------------------------------------------------------
+        // ---------- Methods for Following functionality ----------
 
         public async Task<List<Following>> GetAllFollowingAsync()
         {
