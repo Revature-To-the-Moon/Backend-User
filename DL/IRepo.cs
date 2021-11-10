@@ -22,7 +22,7 @@ namespace DL
         public Task<List<FollowingPost>> GetFollowingPostByUserIdAsync(int userId);
         public Task<List<Following>> GetAllFollowingAsync();
         public Task<Following> GetFollowingByIdAsync(int followingId);
-        public Task<List<Following>> GetFollowingByFollowerUserIdAnync(int userId);
-
+        public Task<List<Following>> GetFollowingByFollowerUserIdAsync(int userId);
+        public Task<List<Following>> GetFollowerByUserIdAsync(int userId);
     }
 }
