@@ -83,7 +83,7 @@ jobs:
           tags: siavashnezhad/tothemoon-user:${{github.run_number}}
       - 
         name: Log into container registry
-        uses: Azure/docker-login@v1.4.0
+        uses: Azure/docker-login@v1
         with:
           login-server: index.docker.io
           username: ${{ secrets.AZ_USERNAME }}
