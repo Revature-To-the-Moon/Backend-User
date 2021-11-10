@@ -89,8 +89,18 @@ jobs:
           username: ${{ secrets.AZ_USERNAME }}
           password: ${{ secrets.AZ_PASSWORD }}
       - 
+        name: Set K8 config
         uses: azure/k8s-set-context@v1
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
         id: setcontext
+      -
+        name: Deplying image to K8s
+        uses: Azure/k8s-deploy@v1.4
+        with:
+          manifests: |
+            tothemoon-user.yml
+          images: |
+            siavashnezhad/tothemoon-user:${{github.run_number}}
+        
