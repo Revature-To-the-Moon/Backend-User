@@ -65,7 +65,7 @@ namespace DL
 
         public async Task<User> GetUserByIdAsync(int userId)
         {
-            return await _context.Users.Include(user => user.FollowingPosts).Include(user=>user.Followings).AsNoTracking().Select(user => new User()
+            return await _context.Users.Include(user => user.FollowingPosts).Include(user => user.Followings).AsNoTracking().Select(user => new User()
             {
                 Id = user.Id,
                 Username = user.Username,
@@ -125,21 +125,16 @@ namespace DL
         }
         public async Task<List<FollowingPost>> GetFollowingPostByUserIdAsync(int userId)
         {
-            return await _context.FollowingPosts.AsNoTracking().Where(u => u.UserId == userId).Select(post=>post).ToListAsync();
+            return await _context.FollowingPosts.AsNoTracking().Where(u => u.UserId == userId).Select(post => post).ToListAsync();
         }
 
-        public Task<List<Following>> GetAllFollowingAsync()
+        public async Task<List<Following>> GetAllFollowingAsync()
         {
-<<<<<<< HEAD
             return await _context.Following.Select(f => f).ToListAsync();
-=======
-            throw new NotImplementedException();
->>>>>>> 7bcf0903b953f4950e952dedd0511df872dd62c3
         }
 
-        public Task<Following> GetFollowingByIdAsync()
+        public async Task<Following> GetFollowingByIdAsync(int followingId)
         {
-<<<<<<< HEAD
             return await _context.Following.AsNoTracking().FirstOrDefaultAsync(f => f.Id == followingId);
         }
 
@@ -151,14 +146,6 @@ namespace DL
         public async Task<List<Following>> GetFollowerByUserIdAsync(int userId)
         {
             return await _context.Following.Where(f => f.FollowingUserId == userId).Select(f => f).ToListAsync();
-=======
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Following>> GetFollowingByFollowerUserIdAnync(int userId)
-        {
-            throw new NotImplementedException();
->>>>>>> 7bcf0903b953f4950e952dedd0511df872dd62c3
         }
     }
 }

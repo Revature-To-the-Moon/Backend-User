@@ -73,21 +73,17 @@ namespace BL
         /// <param name="userId"></param>
         /// <returns>List of following posts.</returns>
         public Task<List<FollowingPost>> GetFollowingPostByUserIdAsync(int userId);
-        
+
         /// <summary>
         /// Gets all following from the database
         /// </summary>
         /// <returns></returns>
         public Task<List<Following>> GetAllFollowingAsync();
 
-        public Task<Following> GetFollowingByIdAsync();
+        public Task<Following> GetFollowingByIdAsync(int followingId);
 
-<<<<<<< HEAD
         public Task<List<Following>> GetFollowingByFollowerUserIdAsync(int userId);
         public Task<List<Following>> GetFollowerByUserIdAsync(int userId);
-=======
-        public Task<List<Following>> GetFollowingByFollowerUserIdAnync(int userId);
->>>>>>> 7bcf0903b953f4950e952dedd0511df872dd62c3
     }
 
 }

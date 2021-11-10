@@ -57,28 +57,27 @@ namespace BL
         {
             return await _repo.GetFollowingPostByRootIdAsync(rootId);
         }
-        
+
         public async Task<FollowingPost> GetFollowingPostByPostnameAsync(string postname)
         {
             return await _repo.GetFollowingPostByPostnameAsync(postname);
         }
-        
+
         public async Task<List<FollowingPost>> GetFollowingPostByUserIdAsync(int userId)
         {
             return await _repo.GetFollowingPostByUserIdAsync(userId);
         }
-        
-        public Task<List<Following>> GetAllFollowingAsync()
+
+        public async Task<List<Following>> GetAllFollowingAsync()
         {
-            throw new NotImplementedException();
+            return await _repo.GetAllFollowingAsync();
         }
-        
-        public Task<Following> GetFollowingByIdAsync()
+
+        public async Task<Following> GetFollowingByIdAsync(int followingId)
         {
-            throw new NotImplementedException();
+            return await _repo.GetFollowingByIdAsync(followingId);
         }
-        
-<<<<<<< HEAD
+
         public async Task<List<Following>> GetFollowingByFollowerUserIdAsync(int userId)
         {
             return await _repo.GetFollowingByFollowerUserIdAsync(userId);
@@ -87,11 +86,6 @@ namespace BL
         public async Task<List<Following>> GetFollowerByUserIdAsync(int userId)
         {
             return await _repo.GetFollowerByUserIdAsync(userId);
-=======
-        public Task<List<Following>> GetFollowingByFollowerUserIdAnync(int userId)
-        {
-            throw new NotImplementedException();
->>>>>>> 7bcf0903b953f4950e952dedd0511df872dd62c3
         }
     }
 }
