@@ -331,6 +331,14 @@ namespace Tests
             Assert.True(1 == followers.Count);
         }
 
+        //testing default constructor
+        [Fact]
+        public void UserDBShouldCreate()
+        {
+            UserDB test = new UserDB();
+            Assert.NotNull(test);
+        }
+
         private void Seed()
         {
             using (var context = new UserDB(options))
