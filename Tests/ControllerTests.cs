@@ -445,7 +445,7 @@ namespace Tests
             };
             var mockBL = new Mock<IBL>();
 
-            mockBL.Setup(x => x.GetFollowingByFollowerUserIdAsync(2)).ReturnsAsync(mockFollowing);
+            mockBL.Setup(x => x.GetFollowerByUserIdAsync(2)).ReturnsAsync(mockFollowing);
                 
             WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
 
