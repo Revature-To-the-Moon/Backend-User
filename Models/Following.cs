@@ -11,8 +11,6 @@ namespace Models
 
         public int FollowerUserId { get; set; }
 
-       // public int UserId { get; set; }
-
         public int FollowingUserId { get; set; }
 
         public string FollowingUserName{ get; set;}
