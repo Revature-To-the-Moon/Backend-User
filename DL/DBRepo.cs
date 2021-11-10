@@ -65,7 +65,7 @@ namespace DL
 
         public async Task<User> GetUserByIdAsync(int userId)
         {
-            return await _context.Users.Include(user => user.FollowingPosts).AsNoTracking().Select(user => new User()
+            return await _context.Users.Include(user => user.FollowingPosts).Include(user=>user.Followings).AsNoTracking().Select(user => new User()
             {
                 Id = user.Id,
                 Username = user.Username,
@@ -75,6 +75,13 @@ namespace DL
                     RootId = p.RootId,
                     Postname = p.Postname,
                     UserId = p.UserId
+                }).ToList(),
+                Followings = _context.Following.Where(f => f.FollowerUserId == user.Id).Select(p => new Following()
+                {
+                    Id = p.Id,
+                    FollowerUserId = p.FollowerUserId,
+                    FollowingUserId = p.FollowingUserId,
+                    FollowingUserName = p.FollowingUserName
                 }).ToList()
             }).FirstOrDefaultAsync(u => u.Id == userId);
         }
@@ -91,6 +98,13 @@ namespace DL
                     RootId = p.RootId,
                     Postname = p.Postname,
                     UserId = p.UserId
+                }).ToList(),
+                Followings = _context.Following.Where(f => f.FollowerUserId == user.Id).Select(p => new Following()
+                {
+                    Id = p.Id,
+                    FollowerUserId = p.FollowerUserId,
+                    FollowingUserId = p.FollowingUserId,
+                    FollowingUserName = p.FollowingUserName
                 }).ToList()
             }).FirstOrDefaultAsync(u => u.Username == username);
         }
@@ -127,6 +141,11 @@ namespace DL
         public async Task<List<Following>> GetFollowingByFollowerUserIdAsync(int userId)
         {
             return await _context.Following.Where(f => f.FollowerUserId == userId).ToListAsync();
+        }
+
+        public async Task<List<Following>> GetFollowerByUserIdAsync(int userId)
+        {
+            return await _context.Following.Where(f => f.FollowingUserId == userId).ToListAsync();
         }
     }
 }
