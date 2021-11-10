@@ -325,10 +325,18 @@ namespace Tests
             using var context = new UserDB(options);
             IRepo repo = new DBRepo(context);
 
-            List<Following> followers = await repo.GetFollowingByFollowerUserIdAsync(1);
+            List<Following> followers = await repo.GetFollowerByUserIdAsync(1);
 
             Assert.NotNull(followers);
             Assert.True(1 == followers.Count);
+        }
+
+        //testing default constructor
+        [Fact]
+        public void UserDBShouldCreate()
+        {
+            UserDB test = new UserDB();
+            Assert.NotNull(test);
         }
 
         private void Seed()
