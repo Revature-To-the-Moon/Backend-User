@@ -104,7 +104,7 @@ jobs:
         uses: Azure/k8s-deploy@v1.4
         with:
           manifests: |
-            tothemoon-user.yml
+            .github/workflows/tothemoon-user.yml
           images: |
             siavashnezhad/tothemoon-user:${{github.run_number}}
         
