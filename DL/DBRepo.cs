@@ -128,13 +128,18 @@ namespace DL
             return await _context.FollowingPosts.AsNoTracking().Where(u => u.UserId == userId).Select(post=>post).ToListAsync();
         }
 
-        public async Task<List<Following>> GetAllFollowingAsync()
+        public Task<List<Following>> GetAllFollowingAsync()
         {
+<<<<<<< HEAD
             return await _context.Following.Select(f => f).ToListAsync();
+=======
+            throw new NotImplementedException();
+>>>>>>> 7bcf0903b953f4950e952dedd0511df872dd62c3
         }
 
-        public async Task<Following> GetFollowingByIdAsync(int followingId)
+        public Task<Following> GetFollowingByIdAsync()
         {
+<<<<<<< HEAD
             return await _context.Following.AsNoTracking().FirstOrDefaultAsync(f => f.Id == followingId);
         }
 
@@ -146,6 +151,14 @@ namespace DL
         public async Task<List<Following>> GetFollowerByUserIdAsync(int userId)
         {
             return await _context.Following.Where(f => f.FollowingUserId == userId).Select(f => f).ToListAsync();
+=======
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Following>> GetFollowingByFollowerUserIdAnync(int userId)
+        {
+            throw new NotImplementedException();
+>>>>>>> 7bcf0903b953f4950e952dedd0511df872dd62c3
         }
     }
 }
