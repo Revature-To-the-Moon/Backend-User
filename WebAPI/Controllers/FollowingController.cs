@@ -10,10 +10,10 @@ namespace WebAPI
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class FollowingController : ControllerBase
+    public class FollowingControllerHiSia : ControllerBase
     {
         private readonly IBL _bl;
-        public FollowingController(IBL bl)
+        public FollowingControllerHiSia(IBL bl)
         {
             _bl = bl;
         }
