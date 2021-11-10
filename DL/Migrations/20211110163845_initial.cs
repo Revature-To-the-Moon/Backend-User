@@ -20,6 +20,28 @@ namespace DL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Following",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FollowerUserId = table.Column<int>(type: "int", nullable: false),
+                    FollowingUserId = table.Column<int>(type: "int", nullable: false),
+                    FollowingUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Following", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Following_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "FollowingPosts",
                 columns: table => new
                 {
@@ -41,6 +63,11 @@ namespace DL.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Following_UserId",
+                table: "Following",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_FollowingPosts_UserId",
                 table: "FollowingPosts",
                 column: "UserId");
@@ -48,6 +75,9 @@ namespace DL.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Following");
+
             migrationBuilder.DropTable(
                 name: "FollowingPosts");
 
