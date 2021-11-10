@@ -140,12 +140,12 @@ namespace DL
 
         public async Task<List<Following>> GetFollowingByFollowerUserIdAsync(int userId)
         {
-            return await _context.Following.Where(f => f.FollowerUserId == userId).ToListAsync();
+            return await _context.Following.Where(f => f.FollowerUserId == userId).Select(f => f).ToListAsync();
         }
 
         public async Task<List<Following>> GetFollowerByUserIdAsync(int userId)
         {
-            return await _context.Following.Where(f => f.FollowingUserId == userId).ToListAsync();
+            return await _context.Following.Where(f => f.FollowingUserId == userId).Select(f => f).ToListAsync();
         }
     }
 }

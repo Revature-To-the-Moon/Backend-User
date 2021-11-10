@@ -32,10 +32,24 @@ namespace WebAPI
             }
         }
 
-        [HttpGet("followeruserid/{followinguserid}")]
-        public async Task<IActionResult> GetByFollowerId(int followeruserid)
+        [HttpGet("followinguserid/{followinguserid}")]
+        public async Task<IActionResult> GetFollowingByUserId(int userid)
         {
-            List<Following> userFollower= await _bl.GetFollowingByFollowerUserIdAsync(followeruserid);
+            List<Following> userFollowing= await _bl.GetFollowingByFollowerUserIdAsync(userid);
+            if (userFollowing != null)
+            {
+                return Ok(userFollowing);
+            }
+            else
+            {
+                return NoContent();
+            }
+        }
+
+        [HttpGet("followeruserid/{followeruserid}")]
+        public async Task<IActionResult> GetFollowerByUserId(int userid)
+        {
+            List<Following> userFollower = await _bl.GetFollowerByUserIdAsync(userid);
             if (userFollower != null)
             {
                 return Ok(userFollower);
