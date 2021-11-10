@@ -449,7 +449,7 @@ namespace Tests
                 
             WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
 
-            var result = await service.GetFollowerByUserId(2) as ObjectResult;
+            var result = await service.GetFollowingByUserId(2) as ObjectResult;
             List<Following> actualResult = (List<Following>)result.Value;
             
             Assert.IsType<OkObjectResult>(result);
