@@ -57,6 +57,9 @@ namespace BL
         /// </summary>
         /// <returns>Lists of following posts.</returns>
         public Task<List<FollowingPost>> GetFollowingPostsAsync();
+
+        public Task<FollowingPost> GetFollowingPostByIdAsync(int Id);
+
         /// <summary>
         /// Gets the following post by the root comment id from the database.
         /// </summary>

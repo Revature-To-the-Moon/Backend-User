@@ -391,7 +391,7 @@ namespace Tests
 
             FollowingPostController service = new FollowingPostController(mockBL.Object);
 
-            var result = await service.Delete(mockFollowingPost.RootId) as ObjectResult;
+            var result = await service.Delete(mockFollowingPost.Id) as ObjectResult;
             var actualResult = result.Value;
 
             Assert.IsType<OkObjectResult>(result);

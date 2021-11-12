@@ -55,6 +55,11 @@ namespace BL
             return await _repo.GetFollowingPostsAsync();
         }
 
+        public async Task<FollowingPost> GetFollowingPostByIdAsync(int Id)
+        {
+            return await _repo.GetFollowingPostByIdAsync(Id);
+        }
+
         public async Task<FollowingPost> GetFollowingPostByRootIdAsync(int rootId)
         {
             return await _repo.GetFollowingPostByRootIdAsync(rootId);

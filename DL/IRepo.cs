@@ -27,6 +27,8 @@ namespace DL
         // ---------- Methods for FollowingPost functionality ----------
 
         public Task<List<FollowingPost>> GetFollowingPostsAsync();
+
+        public Task<FollowingPost> GetFollowingPostByIdAsync(int Id);
         
         public Task<FollowingPost> GetFollowingPostByRootIdAsync(int rootId);
         

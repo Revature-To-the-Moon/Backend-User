@@ -123,6 +123,11 @@ namespace DL
             return await _context.FollowingPosts.AsNoTracking().FirstOrDefaultAsync(u => u.RootId == rootId);
         }
 
+        public async Task<FollowingPost> GetFollowingPostByIdAsync(int Id)
+        {
+            return await _context.FollowingPosts.AsNoTracking().FirstOrDefaultAsync(u => u.Id == Id);
+        }
+
         public async Task<FollowingPost> GetFollowingPostByPostnameAsync(string postname)
         {
             return await _context.FollowingPosts.AsNoTracking().FirstOrDefaultAsync(u => u.Postname == postname);
