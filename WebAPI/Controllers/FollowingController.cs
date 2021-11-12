@@ -80,5 +80,13 @@ namespace WebAPI
             Following addedFollowing = (Following)await _bl.AddObjectAsync(newFollowing);
             return Created("api/[controller]", addedFollowing);
         }
+
+        [HttpDelete("id/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            Following deleteFollowing = await _bl.GetFollowingByIdAsync(id);
+            await _bl.DeleteObjectAsync(deleteFollowing);
+            return Ok(deleteFollowing);
+        }
     }
 }
