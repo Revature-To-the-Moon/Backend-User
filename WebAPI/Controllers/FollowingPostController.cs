@@ -99,10 +99,10 @@ namespace WebAPI.Controllers
         }
 
       
-        [HttpDelete("rootid/{rootid}")]
-        public async Task<IActionResult> Delete(int rootid)
+        [HttpDelete("id/{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            FollowingPost deleteFollowingPost = await _bl.GetFollowingPostByRootIdAsync(rootid);
+            FollowingPost deleteFollowingPost = await _bl.GetFollowingPostByIdAsync(id);
             await _bl.DeleteObjectAsync(deleteFollowingPost);
             return Ok(deleteFollowingPost);
         }
