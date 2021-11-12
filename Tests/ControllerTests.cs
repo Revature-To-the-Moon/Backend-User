@@ -583,6 +583,32 @@ namespace Tests
             Assert.Equal(HttpStatusCode.Created, (HttpStatusCode)result.StatusCode);
             Assert.Equal(mockFollowing, actualResult);
         }
+
+        [Fact]
+        public async Task DeleteByIdShouldDeleteFollowing()
+        {
+            Following mockFollowing = new Following()
+            {
+                Id = 1,
+
+                FollowingUserName = "Test1",
+                FollowingUserId = 2,
+                FollowerUserId = 3
+            };
+
+            var mockBL = new Mock<IBL>();
+
+            mockBL.Setup(x => x.DeleteObjectAsync(mockFollowing));
+
+            WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
+
+            var result = await service.Delete(mockFollowing.Id) as ObjectResult;
+            var actualResult = result.Value;
+
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)result.StatusCode);
+            Assert.NotNull(result);
+        }
         
     }
 }
