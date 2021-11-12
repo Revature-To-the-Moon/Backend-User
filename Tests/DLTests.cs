@@ -211,6 +211,18 @@ namespace Tests
         }
 
         [Fact]
+        public async void GetFollowingPostByIdAsyncShouldReturnThatPost()
+        {
+            using var context = new UserDB(options);
+            IRepo repo = new DBRepo(context);
+
+            FollowingPost post = await repo.GetFollowingPostByIdAsync(2);
+
+            Assert.NotNull(post);
+            Assert.Equal(2, post.RootId);
+        }
+
+        [Fact]
         public async void AddingFollowingPostShouldAddFollowingPost()
         {
             using (var context = new UserDB(options))

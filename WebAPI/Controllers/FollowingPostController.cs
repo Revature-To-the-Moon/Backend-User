@@ -55,6 +55,20 @@ namespace WebAPI.Controllers
             }
         }
 
+         [HttpGet("id/{id}")]
+        public async Task<IActionResult> GetByid(int id)
+        {
+            FollowingPost userFollowingPost = await _bl.GetFollowingPostByIdAsync(id);
+            if (userFollowingPost != null)
+            {
+                return Ok(userFollowingPost);
+            }
+            else
+            {
+                return NoContent();
+            }
+        }
+
         [HttpGet("postname/{postname}")]
         public async Task<IActionResult> GetByPostname(string postname)
         {
