@@ -254,6 +254,31 @@ namespace Tests
         }
 
         [Fact]
+        public async Task GetFollowingPostByIdShouldReturnFollowingPost()
+        {
+            FollowingPost mockFollowingPost =  new FollowingPost()
+            {
+                Id = 1,
+                Postname = "test1",
+                RootId = 1,
+                UserId = 4
+            };
+            
+            var mockBL = new Mock<IBL>();
+
+            mockBL.Setup(x => x.GetFollowingPostByIdAsync(1)).ReturnsAsync(mockFollowingPost);
+
+            FollowingPostController service = new FollowingPostController(mockBL.Object);
+
+            var result = await service.GetByid(1) as ObjectResult;
+            var actualResult = result.Value;
+            var noresult = await service.GetByid(-1) as ObjectResult;
+
+            Assert.IsType<OkObjectResult>(result);
+            Assert.Null(noresult);
+        }
+
+        [Fact]
         public async Task GetFollowingPostByRootIdShouldReturnFollowingPost()
         {
             FollowingPost mockFollowingPost =  new FollowingPost()
