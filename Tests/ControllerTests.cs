@@ -508,24 +508,27 @@ namespace Tests
                 {
                     Id = 2,
                     FollowingUserName = "test2",
-                    FollowerUserId = 2
+                    FollowerUserId = 2,
+                   
                 },
                 new Following()
                 {
                     Id = 3,
                     FollowingUserName = "test3",
-                    FollowerUserId = 2
+                    FollowerUserId = 2,
+                   
                 },
                 new Following()
                 {
                     Id = 4,
                     FollowingUserName = "test4",
-                    FollowerUserId = 2
+                    FollowerUserId = 2,
+                   
                 }
             };
             var mockBL = new Mock<IBL>();
 
-            mockBL.Setup(x => x.GetFollowerByUserIdAsync(2)).ReturnsAsync(mockFollowing);
+            mockBL.Setup(x => x.GetFollowingByFollowerUserIdAsync(2)).ReturnsAsync(mockFollowing);
                 
             WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
 
@@ -569,7 +572,7 @@ namespace Tests
             };
             var mockBL = new Mock<IBL>();
 
-            mockBL.Setup(x => x.GetFollowingByFollowerUserIdAsync(7)).ReturnsAsync(mockFollowing);
+            mockBL.Setup(x => x.GetFollowerByUserIdAsync(7)).ReturnsAsync(mockFollowing);
                 
             WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
 
