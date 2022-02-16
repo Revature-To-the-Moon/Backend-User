@@ -2,7 +2,7 @@ name: .NET
 
 on:
   push:
-    branches: [ Master ]
+    branches: [ Master, Dev ]
   pull_request:
     branches: [ Master ]
 
@@ -23,3 +23,4 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      
