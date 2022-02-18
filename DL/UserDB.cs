@@ -22,5 +22,5 @@ namespace DL
 }
 
 //After every change to models Last ran initMig3
-//dotnet ef migrations add AddedGroupModel -c UserDB --startup-project ../WebAPI
+//dotnet ef migrations add AddedGroupModels -c UserDB --startup-project ../WebAPI
 //dotnet ef database update --startup-project ../WebAPI
