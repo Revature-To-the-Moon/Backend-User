@@ -425,37 +425,37 @@ namespace Tests
         }
 
         //FollowingController
-        [Fact]
-        public async Task GetFollowingShouldReturnListofFollowingAsync()
-        {
-            List<Following> mockFollowing = new List<Following>()
-            {
-                new Following()
-                {
-                    Id = 1,
-                    FollowingUserName = "test1"
+        // [Fact]
+        // public async Task GetFollowingShouldReturnListofFollowingAsync()
+        // {
+        //     List<Following> mockFollowing = new List<Following>()
+        //     {
+        //         new Following()
+        //         {
+        //             Id = 1,
+        //             FollowingUserName = "test1"
 
-                },
-                new Following()
-                {
-                    Id = 2,
-                    FollowingUserName = "test2"
-                }
-            };
-            var mockBL = new Mock<IBL>();
+        //         },
+        //         new Following()
+        //         {
+        //             Id = 2,
+        //             FollowingUserName = "test2"
+        //         }
+        //     };
+        //     var mockBL = new Mock<IBL>();
 
-            mockBL.Setup(x => x.GetAllFollowingAsync()).ReturnsAsync(mockFollowing);
+        //     mockBL.Setup(x => x.GetAllFollowingAsync()).ReturnsAsync(mockFollowing);
                 
-            WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
+        //     WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
 
-            var result = await service.Get() as ObjectResult;
-            var actualResult = (List<Following>)result.Value;
+        //     var result = await service.Get() as ObjectResult;
+        //     var actualResult = (List<Following>)result.Value;
         
-            Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)result.StatusCode);
-            Assert.Equal(2, actualResult.Count);
+        //     Assert.IsType<OkObjectResult>(result);
+        //     Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)result.StatusCode);
+        //     Assert.Equal(2, actualResult.Count);
             
-        }
+        // }
 
         [Fact]
         public async Task GetFollowingnullShouldReturnNullAsync()
@@ -499,91 +499,91 @@ namespace Tests
             Assert.Null(noresult);
         }
 
-        [Fact]
-        public async Task GetFollowingByFollowerUserIdShouldReturnListofFollowingAsync()
-        {
-            List<Following> mockFollowing = new List<Following>()
-            {
-                new Following()
-                {
-                    Id = 2,
-                    FollowingUserName = "test2",
-                    FollowerUserId = 2
-                },
-                new Following()
-                {
-                    Id = 3,
-                    FollowingUserName = "test3",
-                    FollowerUserId = 2
-                },
-                new Following()
-                {
-                    Id = 4,
-                    FollowingUserName = "test4",
-                    FollowerUserId = 2
-                }
-            };
-            var mockBL = new Mock<IBL>();
+        // [Fact]
+        // public async Task GetFollowingByFollowerUserIdShouldReturnListofFollowingAsync()
+        // {
+        //     List<Following> mockFollowing = new List<Following>()
+        //     {
+        //         new Following()
+        //         {
+        //             Id = 2,
+        //             FollowingUserName = "test2",
+        //             FollowerUserId = 2
+        //         },
+        //         new Following()
+        //         {
+        //             Id = 3,
+        //             FollowingUserName = "test3",
+        //             FollowerUserId = 2
+        //         },
+        //         new Following()
+        //         {
+        //             Id = 4,
+        //             FollowingUserName = "test4",
+        //             FollowerUserId = 2
+        //         }
+        //     };
+        //     var mockBL = new Mock<IBL>();
 
-            mockBL.Setup(x => x.GetFollowerByUserIdAsync(2)).ReturnsAsync(mockFollowing);
+        //     mockBL.Setup(x => x.GetFollowerByUserIdAsync(2)).ReturnsAsync(mockFollowing);
                 
-            WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
+        //     WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
 
-            var result = await service.GetFollowerByUserId(2) as ObjectResult;
-            var noresult = await service.GetFollowerByUserId(-1) as ObjectResult;
-            List<Following> actualResult = (List<Following>)result.Value;
+        //     var result = await service.GetFollowerByUserId(2) as ObjectResult;
+        //     var noresult = await service.GetFollowerByUserId(-1) as ObjectResult;
+        //     List<Following> actualResult = (List<Following>)result.Value;
             
-            Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)result.StatusCode);
-            Assert.Equal(3, actualResult.Count);
-            Assert.Equal(2, actualResult[0].Id);
-            Assert.Null(noresult);
-        }
+        //     Assert.IsType<OkObjectResult>(result);
+        //     Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)result.StatusCode);
+        //     Assert.Equal(3, actualResult.Count);
+        //     Assert.Equal(2, actualResult[0].Id);
+        //     Assert.Null(noresult);
+        // }
 
-        [Fact]
-        public async Task GetFollowingByUserIdShouldReturnListofFollowingAsync()
-        {
-            List<Following> mockFollowing = new List<Following>()
-            {
-                new Following()
-                {
-                    Id = 2,
-                    FollowingUserName = "test2",
-                    FollowerUserId = 2,
-                    FollowingUserId = 7
-                },
-                new Following()
-                {
-                    Id = 3,
-                    FollowingUserName = "test3",
-                    FollowerUserId = 2,
-                    FollowingUserId = 7
-                },
-                new Following()
-                {
-                    Id = 4,
-                    FollowingUserName = "test4",
-                    FollowerUserId = 2,
-                    FollowingUserId = 7
-                }
-            };
-            var mockBL = new Mock<IBL>();
+        // [Fact]
+        // public async Task GetFollowingByUserIdShouldReturnListofFollowingAsync()
+        // {
+        //     List<Following> mockFollowing = new List<Following>()
+        //     {
+        //         new Following()
+        //         {
+        //             Id = 2,
+        //             FollowingUserName = "test2",
+        //             FollowerUserId = 2,
+        //             FollowingUserId = 7
+        //         },
+        //         new Following()
+        //         {
+        //             Id = 3,
+        //             FollowingUserName = "test3",
+        //             FollowerUserId = 2,
+        //             FollowingUserId = 7
+        //         },
+        //         new Following()
+        //         {
+        //             Id = 4,
+        //             FollowingUserName = "test4",
+        //             FollowerUserId = 2,
+        //             FollowingUserId = 7
+        //         }
+        //     };
+        //     var mockBL = new Mock<IBL>();
 
-            mockBL.Setup(x => x.GetFollowingByFollowerUserIdAsync(7)).ReturnsAsync(mockFollowing);
+        //     mockBL.Setup(x => x.GetFollowingByFollowerUserIdAsync(7)).ReturnsAsync(mockFollowing);
                 
-            WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
+        //     WebAPI.FollowingController service = new WebAPI.FollowingController(mockBL.Object);
 
-            var result = await service.GetFollowingByUserId(7) as ObjectResult;
-            var noresult = await service.GetFollowingByUserId(-7) as ObjectResult;
+        //     var result = await service.GetFollowingByUserId(7) as ObjectResult;
+        //     var noresult = await service.GetFollowingByUserId(-7) as ObjectResult;
 
-            List<Following> actualResult = (List<Following>)result.Value;
+        //     List<Following> actualResult = (List<Following>)result.Value;
             
-            Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)result.StatusCode);
-            Assert.Equal(3, actualResult.Count);
-            Assert.Equal(2, actualResult[0].Id);
-            Assert.Null(noresult);
-        }
+        //     Assert.IsType<OkObjectResult>(result);
+        //     Assert.Equal(HttpStatusCode.OK, (HttpStatusCode)result.StatusCode);
+        //     Assert.Equal(3, actualResult.Count);
+        //     Assert.Equal(2, actualResult[0].Id);
+        //     Assert.Null(noresult);
+        // }
 
         [Fact]
         public async Task AddShouldAddFollowing()
