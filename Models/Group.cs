@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 namespace Models;
-
 public class Group
 {
     public Group(){}
-
+    
     public int Id { get; set; } //fyi GroupId
 
     public int CreatedByUserId { get; set; } //Made Group
@@ -20,6 +19,8 @@ public class Group
     public string Message { get; set; } //Description of group
 
     public DateTime Date { get; set; } //When group was made
+
+    //public List<GroupMembers> UsersJoined { get; set; }
 
 
 }

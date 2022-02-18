@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Models;
 
-
-
 namespace DL
 {
     public class UserDB : DbContext
@@ -16,7 +14,10 @@ namespace DL
         public DbSet<FollowingPost> FollowingPosts { get; set; }
 
         public DbSet<Following> Following { get; set; }
-
+    
+        public DbSet<Group> Groups { get; set; }
+        
+        public DbSet<GroupMembers> GroupMembers { get; set; }
     }
 }
 

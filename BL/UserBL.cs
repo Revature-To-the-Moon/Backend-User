@@ -95,5 +95,34 @@ namespace BL
         {
             return await _repo.GetFollowerByUserIdAsync(userId);
         }
+
+        // ---------- Methods for Grouping functionality ----------
+
+        public async Task<List<Group>> GetAllGroupsAsync()
+        {
+            return await _repo.GetAllGroupsAsync();
+        }
+        
+        public async Task<Group> GetGroupByIdAsync(int groupId)
+        {
+            return await _repo.GetGroupByIdAsync(groupId);
+        }
+        
+        public async Task<List<Group>> GetGroupsByGroupNameAsync(string searchTerm)
+        {
+            return await _repo.GetGroupsByGroupNameAsync(searchTerm);
+        }
+
+        // ---------- Methods for GroupMember functionality ----------
+
+        public async Task<List<GroupMembers>> GetGroupsByUserIdAsync(int memberUserId)
+        {
+            return await _repo.GetGroupsByUserIdAsync(memberUserId);
+        }
+
+        public async Task RemoveMemberFromGroupAsync (int groupId, int memberUserId)
+        {
+            await _repo.RemoveMemberFromGroupAsync(groupId, memberUserId);
+        }
     }
 }

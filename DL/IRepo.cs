@@ -45,5 +45,20 @@ namespace DL
         public Task<List<Following>> GetFollowingByFollowerUserIdAsync(int userId);
         
         public Task<List<Following>> GetFollowerByUserIdAsync(int userId);
+
+        // ---------- Methods for Grouping functionality ----------
+
+        public Task<List<Group>> GetAllGroupsAsync();
+        
+        public Task<Group> GetGroupByIdAsync(int groupId);
+        
+        public Task<List<Group>> GetGroupsByGroupNameAsync(string searchTerm);
+
+        // ---------- Methods for GroupMember functionality ----------
+
+        public Task<List<GroupMembers>> GetGroupsByUserIdAsync(int memberUserId);
+
+        public Task RemoveMemberFromGroupAsync (int groupId, int memberUserId);
+
     }
 }

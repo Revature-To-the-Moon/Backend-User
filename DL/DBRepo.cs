@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -158,5 +158,39 @@ namespace DL
         {
             return await _context.Following.Where(f => f.FollowingUserId == userId).Select(f => f).ToListAsync();
         }
+
+        // ---------- Methods for Grouping functionality ----------
+
+        public async Task<List<Group>> GetAllGroupsAsync()
+        {
+            return await _context.Groups.Select(g => g).ToListAsync();
+        }
+
+        public async Task<Group> GetGroupByIdAsync(int groupId)
+        {
+            return await _context.Groups.AsNoTracking().FirstOrDefaultAsync(g => g.Id == groupId);
+        }
+        
+        public async Task<List<Group>> GetGroupsByGroupNameAsync(string searchTerm)
+        {
+            return await _context.Groups.Where(g => g.GroupName.ToLower().Contains(searchTerm.ToLower())).ToListAsync();
+        }
+        
+        // ---------- Methods for GroupMember functionality ----------
+
+        public async Task<List<GroupMembers>> GetGroupsByUserIdAsync(int memberUserId)
+        {
+            return await _context.GroupMembers.Where(g => g.MemberUserId == memberUserId).Select(g => g).ToListAsync(); //Check if the user is a member of that certain group
+        }
+
+        public async Task RemoveMemberFromGroupAsync (int groupId, int memberUserId)
+        {
+            GroupMembers member;
+             member = _context.GroupMembers.Where(g => g.GroupId == groupId && g.MemberUserId == memberUserId).First(); //
+                        _context.Remove(member);
+                        await _context.SaveChangesAsync();
+                        _context.ChangeTracker.Clear();
+        }
+        
     }
 }
