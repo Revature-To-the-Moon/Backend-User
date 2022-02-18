@@ -52,6 +52,7 @@ namespace WebAPI.Controllers
             return Created("api/[controller]", addedGroupMember);
         }
 
+        //We don't really need this
         // PUT api/<GroupMemberController>/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromBody] GroupMembers updateGroupMembers)
