@@ -109,6 +109,45 @@ namespace BL
         /// <param name="userId"></param>
         /// <returns>List of following</returns>
         public Task<List<Following>> GetFollowerByUserIdAsync(int userId);
+
+        // ---------- Methods for Grouping functionality ----------
+
+        /// <summary>
+        /// Get list of all groups
+        /// </summary>
+        /// <returns>List of groups</returns>
+        public Task<List<Group>> GetAllGroupsAsync();
+        
+        /// <summary>
+        /// Returns a group by its Id
+        /// </summary>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+        public Task<Group> GetGroupByIdAsync(int groupId);
+        
+        /// <summary>
+        /// Get a list of groups containing search term
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        public Task<List<Group>> GetGroupsByGroupNameAsync(string searchTerm);
+
+        // ---------- Methods for GroupMember functionality ----------
+
+        /// <summary>
+        /// Returns all groups a user is subscribed to
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public Task<List<GroupMembers>> GetGroupsByUserIdAsync(int memberUserId);
+
+        /// <summary>
+        /// Remove member from group by GroupId and it's memberId
+        /// </summary>
+        /// <param name="groupId"></param>
+        /// <param name="memberUserId"></param>
+        /// <returns></returns>
+        public Task RemoveMemberFromGroupAsync (int groupId, int memberUserId);
     }
 
 }
