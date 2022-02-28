@@ -13,11 +13,11 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GroupMemberController : ControllerBase
+    public class GroupMembersController : ControllerBase
     {
         private readonly IBL _bl;
 
-        public GroupMemberController(IBL bl)
+        public GroupMembersController(IBL bl)
         {
             _bl = bl;
         }
@@ -31,9 +31,9 @@ namespace WebAPI.Controllers
 
         // GET api/<GroupMemberController>/5
         [HttpGet("id/{id}")]
-        public async Task<IActionResult> Get(int userId)
+        public async Task<IActionResult> Get(int id)
         {
-            List<GroupMembers> foundGroup = await _bl.GetGroupsByUserIdAsync(userId);
+            List<GroupMembers> foundGroup = await _bl.GetGroupsByUserIdAsync(id);
             if (foundGroup != null)
             {
                 return Ok(foundGroup);
